@@ -19,6 +19,9 @@ Nesse app, você poderá:
 <p> Primeira versão com página de home, login e inscrição. </p>
 <p> Toda estrutura dos arquivos iniciada para o desenvolvimento </p>
 <p> Nenhuma funcionalidade implementada. </p>
+- Versão 0.2
+<p> Data Release: 03/02/2025 </p>
+<p> Cadastra e salva usuários no banco de dados. </p>
 
 ## Detalhes Técnicos
 
