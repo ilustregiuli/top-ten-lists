@@ -32,4 +32,5 @@ Nesse app, você poderá:
 
 ## Próximas Features
 
-- Cadastrar no APP
+- ~Cadastrar no APP~
+- Cadastrar lista
