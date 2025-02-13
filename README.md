@@ -24,6 +24,10 @@ Nesse app, você poderá:
 <p> Data Release: 03/02/2025 </p>
 <p> Cadastra e salva usuários no banco de dados. </p>
 
+- Versão 0.3
+<p> Data Release: 13/02/2025 </p>
+<p> Criação de entidade Lista, controller e formulario referente a ela. </p>
+
 ## Detalhes Técnicos
 
 <p> Projeto criado em linguagem: PHP 8.2.27 </p>
