@@ -10,5 +10,10 @@ class Usuario extends Model
         'email', 'nome', 'password'
     ];
 
+    public function listas()
+    {
+        return $this->hasMany(Lista::class);
+    }
+
 
 }
