@@ -28,6 +28,10 @@ Nesse app, você poderá:
 <p> Data Release: 13/02/2025 </p>
 <p> Criação de entidade Lista, controller e formulario referente a ela. </p>
 
+- Versão 0.4
+<p> Data Release: 19/03/2025 </p>
+<p> Primeiras formatações de formulário para cadastro de lista e posições da lista. </p>
+
 ## Detalhes Técnicos
 
 <p> Projeto criado em linguagem: PHP 8.2.27 </p>
