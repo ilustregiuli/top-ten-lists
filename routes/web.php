@@ -9,5 +9,6 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [loginController::class, 'login']);
 Route::get('/subscrive', [loginController::class, 'subscrive']);
 Route::post('/subscrive', [loginController::class, 'store'])->name('cadastrar');
+
 Route::resource('lists', ListController::class);
 
