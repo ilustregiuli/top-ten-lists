@@ -17,82 +17,98 @@
 
                 <div>
                     <label for="listName">Nome da Lista: </label><br><br>
-                    <input type="text" id="listName" name="nameList" placeholder="Digite o nome da lista!" required>
+                    <input type="text" id="listName" name="listName" placeholder="Digite o nome da lista!" required>
                     <br><br>
                 </div>
 
                 <div>
-                    <button type="button" id="addPositions"> Adicionar posições</button>
-                </div>
-
-
-                <div id="itemsContainer" style="display:none;">
-                    <br>
+                    <button type="button" id="addPositions" onclick="insertPositions()"> Confirma </button>
                 </div>
 
                 <br>
-                <button type="submit" id="sendList" style="display:none;">Criar Lista!</button>
+                <div id="itemsContainer" style="display:none;"></div>
+                <br>
+                <div style="display: flex; justify-content: center;">
+                    <button type="button" id="addItemPosition" style="display:none;"> Adiciona Item </button>
+                </div>
+
+                <br>
+                <div style="display: flex; justify-content: center;">
+                    <button type="submit" id="sendList" style="display:none;">Criar Lista!</button>
+                    <button type="button" id="clearList" style="display:none;">Limpar</button>
+                </div>
+
             </form>
         </section>
 
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let itemCount = 1;
-            const maxItems = 10;
-            const addPositions = document.getElementById('addPositions');
-            const itemsContainer = document.getElementById('itemsContainer');
 
-            function createItemForm(itemNumber) {
-                const itemDiv = document.createElement('div');
-                itemDiv.id  = `item${itemNumber}`;
+        let position = 0;
 
-                const label = document.createElement('label');
-                label.setAttribute('for',`${itemNumber}º Lugar`);
-                label.textContent = `${itemNumber}º Lugar: `;
+        function insertPositions() {
 
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.id = `item${itemNumber}`;
-                input.name = `item${itemNumber}`;
+            const buttonConfirmar = document.getElementById('addPositions');
+            const divElementsList = document.getElementById('itemsContainer');
+            const itemPosition = document.getElementById('addItemPosition');
+            const sendList = document.getElementById('sendList');
+            const clearList = document.getElementById('clearList');
 
-                const confirmItem = document.createElement('button');
-                confirmItem.type = 'button';
-                confirmItem.textContent = 'Confirmar Item';
+            buttonConfirmar.style.display = 'none';
 
-                confirmItem.addEventListener('click', function() {
-                    const itemValue = input.value.trim();
-                    if (itemValue) {
-                        itemDiv.style.display = 'none';
-                        if (itemNumber < maxItems) {
-                            createItemForm(itemNumber + 1);
-                        } else {
-                            salvarlist.style.display = 'block';
-                        }
+            addItem();
 
-                    } else {
-                        alert('Campo vazio! Preencha antes.');
-                    }
-                });
+            divElementsList.style.display ='block';
+            itemPosition.style.display ='block';
+            sendList.style.display = 'block';
+            clearList.style.display = 'block';
 
-                itemDiv.appendChild(label);
-                itemDiv.appendChild(input);
-                itemDiv.appendChild(confirmItem);
+        }
 
-                itemsContainer.appendChild(itemDiv);
+        function addItem() {
 
+            if (position >= 10) {
+                document.getElementById('addItemPosition').style.display = 'none';
+                return;
             }
 
-            document.addEventListener('click', function() {
-                itemsContainer.style.display = 'block';
-            });
+            position++;
 
-            createItemForm(itemCount);
+            const divElementsList = document.getElementById('itemsContainer');
 
-        });
+            const itemDiv = document.createElement('div');
+            itemDiv.id = `item_${position}`;
+
+            const label = document.createElement('label');
+            label.setAttribute('for', `item_${position}`);
+            label.textContent = `${position}º Lugar:`;
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = `item_${position}`;
+            input.name = `item_${position}`;
+
+            itemDiv.appendChild(label);
+            itemDiv.appendChild(input);
+            divElementsList.appendChild(itemDiv);
+
+        }
+
+        function clearList() {
+            document.getElementById('listName').value = '';
+
+            const divElementsList = document.getElementById('itemsContainer');
+
+            divElementsList.innerHTML = '';
+            position = 0;
+
+            addItem();
+        }
+
+        document.getElementById('addItemPosition').addEventListener('click', addItem);
+        document.getElementById('clearList').addEventListener('click', clearList);
 
     </script>
-
 
 @endsection
