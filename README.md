@@ -46,3 +46,5 @@ Nesse app, você poderá:
 
 - ~Cadastrar no APP~
 - Cadastrar lista
+- Apresentar as listas por usuário
+- Editar as listas
