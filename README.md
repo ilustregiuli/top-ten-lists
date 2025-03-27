@@ -32,6 +32,10 @@ Nesse app, você poderá:
 <p> Data Release: 19/03/2025 </p>
 <p> Primeiras formatações de formulário para cadastro de lista e posições da lista. </p>
 
+- Versão 0.5
+<p> Data Release: 26/03/2025 </p>
+<p> Ajuste do formulário de criação de lista: insere nome da lista e itens dinamicamente. </p>
+
 ## Detalhes Técnicos
 
 <p> Projeto criado em linguagem: PHP 8.2.27 </p>
