@@ -18,5 +18,13 @@ class Lista extends Model
         'pos_08',
         'pos_09',
         'pos_10',
+        'usuario_id'
         ];
+
+    // Criar relação com o usuário
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+
 }

@@ -10,6 +10,7 @@ class Usuario extends Model
         'email', 'nome', 'password'
     ];
 
+    // criar relação com as listas
     public function listas()
     {
         return $this->hasMany(Lista::class);

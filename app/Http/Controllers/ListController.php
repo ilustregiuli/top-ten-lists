@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lista;
 use Illuminate\Http\Request;
 
 class ListController extends Controller
@@ -28,9 +29,24 @@ class ListController extends Controller
      */
     public function store(Request $request)
     {
-        $dados = $request->all();
+        $input = $request->all();
 
-        dd($dados);
+        $lista = Lista::create([
+            'nome' => $input['listName'],
+            'pos_01' => $input['item_1'] ?? null,
+            'pos_02' => $input['item_2'] ??  null,
+            'pos_03' => $input['item_3'] ??  null,
+            'pos_04' => $input['item_4'] ??  null,
+            'pos_05' => $input['item_5'] ?? null,
+            'pos_06' => $input['item_6'] ??  null,
+            'pos_07' => $input['item_7'] ??  null,
+            'pos_08' => $input['item_8'] ??  null,
+            'pos_09' => $input['item_9'] ??  null,
+            'pos_10' => $input['item_10'] ?? null,
+            'usuario_id' => 1
+        ]);
+
+        echo "OK!";
     }
 
     /**
