@@ -36,6 +36,11 @@ Nesse app, você poderá:
 <p> Data Release: 26/03/2025 </p>
 <p> Ajuste do formulário de criação de lista: insere nome da lista e itens dinamicamente. </p>
 
+- Versão 0.6
+<p> Data Release: 24/04/2025 </p>
+<p> Após o cadastro da nova lista, mostra tela com a nova lista criada. </p>
+<p> Botão de retorno para tela principal, mostrando todas as listas já cadastradas. </p>
+
 ## Detalhes Técnicos
 
 <p> Projeto criado em linguagem: PHP 8.2.27 </p>
@@ -45,6 +50,7 @@ Nesse app, você poderá:
 ## Próximas Features
 
 - ~Cadastrar no APP~
-- Cadastrar lista
+- ~Cadastrar lista~
+- Fazer login na plataforma
 - Apresentar as listas por usuário
 - Editar as listas
