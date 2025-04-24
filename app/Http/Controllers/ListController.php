@@ -13,7 +13,8 @@ class ListController extends Controller
      */
     public function index()
     {
-
+        $listas = Lista::all();
+        return view('listas.index', compact('listas'));
     }
 
     /**
@@ -46,7 +47,7 @@ class ListController extends Controller
             'usuario_id' => 1
         ]);
 
-        echo "OK!";
+        return view('listas.lista_criada', compact('lista'));
     }
 
     /**
