@@ -2,7 +2,8 @@
 
 @section('content')
 
-@foreach($listas as $lista)
+<div class="listas-container">
+    @foreach($listas as $lista)
     <div class="lista">
         <h3> {{ $lista->nome }} </h3>
         <ol>
@@ -20,6 +21,7 @@
             @endfor
         </ol>
     </div>
-@endforeach
+    @endforeach
+</div>
 
 @endsection

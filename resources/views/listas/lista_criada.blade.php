@@ -20,7 +20,7 @@
     @endphp
 </div>
 
-<div style="display: block;">
+<div>
     <form action="{{ route('lists.index') }}">
         <button type="submit" class="btn btn-secondary">Voltar Início</button>
     </form>
