@@ -41,6 +41,10 @@ Nesse app, você poderá:
 <p> Após o cadastro da nova lista, mostra tela com a nova lista criada. </p>
 <p> Botão de retorno para tela principal, mostrando todas as listas já cadastradas. </p>
 
+- Versão 0.6.1
+<p> Data Release: 16/09/2025 </p>
+<p> Após o cadastro da nova lista, mostra tela com a nova lista criada. </p>
+
 ## Detalhes Técnicos
 
 <p> Projeto criado em linguagem: PHP 8.2.27 </p>
