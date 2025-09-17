@@ -43,7 +43,8 @@ Nesse app, você poderá:
 
 - Versão 0.6.1
 <p> Data Release: 16/09/2025 </p>
-<p> Após o cadastro da nova lista, mostra tela com a nova lista criada. </p>
+<p> Implementando o uso Vite no projeto. </p>
+<p> Inserção de logo e troca de cor. </p>
 
 ## Detalhes Técnicos
 
