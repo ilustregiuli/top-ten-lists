@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Michroma&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Comic+Relief:wght@400;700&family=Michroma&display=swap');
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -74,5 +77,29 @@ a:hover {
     height: 300px;
     width: 300px;
 }
+
+
+
+
+.michroma-regular {
+  font-family: "Michroma", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.comic-relief-regular {
+  font-family: "Comic Relief", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.comic-relief-bold {
+  font-family: "Comic Relief", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
 
 

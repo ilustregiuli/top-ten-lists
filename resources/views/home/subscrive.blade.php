@@ -4,7 +4,7 @@
 
 @section('content')
     <div>
-        <h1>TOP TEN LISTS</h1>
+        <h1 class="michroma-regular">TOP TEN LISTS</h1>
         <section class="form">
             <h2>Inscreva-se e comece a cadastrar suas listas!</h2>
 

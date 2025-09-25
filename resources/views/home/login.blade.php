@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <h1>TOP TEN LISTS</h1>
+        <h1 class="michroma-regular">TOP TEN LISTS</h1>
         <section class="login">
             <h2>Login</h2>
             <form action="#" method="post">
