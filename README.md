@@ -56,6 +56,4 @@ Nesse app, você poderá:
 
 - ~Cadastrar no APP~
 - ~Cadastrar lista~
-- Fazer login na plataforma
-- Apresentar as listas por usuário
-- Editar as listas
+- Próximas Features: [Acompanhamento do Projeto - Trello](https://trello.com/b/JnlP6Hud/top-ten-lists)
