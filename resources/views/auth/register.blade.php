@@ -1,12 +1,16 @@
-<x-guest-layout>
+@extends('home.master')
+
+@section('content')
+
+<x-guest-layout>    
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="nome" :value="__('Nome')" />
+            <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus autocomplete="nome" />
+            <x-input-error :messages="$errors->get('nome')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
@@ -41,7 +45,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+                {{ __('Já tem uma conta? Acesse aqui.') }}
             </a>
 
             <x-primary-button class="ms-4">
@@ -50,3 +54,5 @@
         </div>
     </form>
 </x-guest-layout>
+
+@endsection
