@@ -12,7 +12,7 @@
         <nav>
             <a href="/">Home</a>
             <a href="/login">Login</a>
-            <a href="/subscrive">Inscreva-se!</a>
+            <a href="{{ route('register') }}">Inscreva-se!</a>
 
         </nav>
     </header>

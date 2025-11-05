@@ -12,6 +12,12 @@
     <div class="flex justify-center mt-8">
         <img src="{{ Vite::asset('resources/images/logo.jpg') }}" class="image-center">
     </div>
+
+    <div>
+        <a href="{{ route('register') }}" class="hover:text-blue-500 text-gray-600">
+            <div class="font-['Michroma'] text-2xl font-bold text-gray-500 mb-5">Cadastre-se aqui e crie suas listas!</div>
+        </a>
+    </div>
 @endsection
 
 
