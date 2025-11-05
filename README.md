@@ -46,6 +46,11 @@ Nesse app, você poderá:
 <p> Implementando o uso Vite no projeto. </p>
 <p> Inserção de logo e troca de cor. </p>
 
+- Versão 0.7
+<p> Data Release: 05/11/2025 </p>
+<p> Implementando o uso do Breeze para autenticação. </p>
+<p> Troca pelas rotas e controllers do Breeze. </p>
+
 ## Detalhes Técnicos
 
 <p> Projeto criado em linguagem: PHP 8.2.27 </p>
