@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Michroma&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Comic+Relief:wght@400;700&family=Michroma&display=swap');
 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -44,6 +50,12 @@ footer {
 a {
     color: white;
     text-decoration: none;
+}
+
+.link_01 {
+    color: #041035;
+    background-color: rgb(99, 219, 179);
+    font-size: 25px;
 }
 
 a:hover {

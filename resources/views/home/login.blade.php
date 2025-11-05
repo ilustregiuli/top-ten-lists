@@ -5,7 +5,8 @@
         <h1 class="michroma-regular">TOP TEN LISTS</h1>
         <section class="login">
             <h2>Login</h2>
-            <form action="#" method="post">
+            <form action="{{ route('entrar') }}" method="post">
+                @csrf
                 <label for="username">Usuário:</label><br>
                 <input type="text" id="username" name="username" required><br><br>
 

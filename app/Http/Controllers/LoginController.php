@@ -13,6 +13,15 @@ class LoginController extends Controller
         return view('home.login');
     }
 
+    public function entrar(Request $request)
+    {
+        $dados = $request->all();
+        dd($dados['_token'] . ", " . $dados['username']);
+        $user = Usuario::where('email', $dados['username'])->first();
+        //dd($user->nome);
+        return view('home.user_page', ['user' => $user]);
+    }
+
     public function subscrive()
     {
         return view('home.subscrive');
@@ -28,6 +37,7 @@ class LoginController extends Controller
         ]);
 
         $saved = $usuario->save();
-        dd('Dados Salvos com sucesso! ' . $saved);
+        return redirect('/boas-vindas');
+        
     }
 }
