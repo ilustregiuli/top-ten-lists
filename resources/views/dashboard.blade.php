@@ -1,17 +1,29 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('home.master')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+@section('content')
+
+    {{ dd(Auth::user()->id)}}
+
+    <!-- <div class="listas-container">
+    @foreach($listas as $lista)
+    <div class="lista">
+        <h3> {{ $lista->nome }} </h3>
+        <ol>
+            @for ($i = 1; $i <= 10 ; $i++)
+                @php
+                    $campo = 'pos_0' . $i;
+                    if ($i == 10) {
+                        $campo = 'pos_10';
+                    }
+                @endphp
+
+                @if (!empty($lista->$campo))
+                    <li> {{ $lista->$campo }} </li>
+                @endif
+            @endfor
+        </ol>
     </div>
-</x-app-layout>
+    @endforeach
+</div> -->
+
+@endsection

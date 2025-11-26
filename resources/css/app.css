@@ -90,6 +90,12 @@ a:hover {
     width: 300px;
 }
 
+.image-small {
+    display: inline;
+    height: 150px;
+    width: 150px;
+}
+
 
 
 

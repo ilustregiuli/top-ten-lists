@@ -8,11 +8,23 @@
 </head>
 <body>
     <header>
-        <div>Links</div>
+        <div></div>
         <nav>
             <a href="/">Home</a>
-            <a href="/login">Login</a>
-            <a href="{{ route('register') }}">Inscreva-se!</a>
+            @guest
+                
+                <a href="/login">Login</a>
+                <a href="{{ route('register') }}">Inscreva-se!</a>
+            @endguest
+
+            @auth
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <button type="submit" style="background: red; border: none; color: inherit; text-decoration: underline; cursor: pointer; font: inherit;">
+                        Logout
+                    </button>
+                </form>
+            @endauth
 
         </nav>
     </header>
