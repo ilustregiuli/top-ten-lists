@@ -12,7 +12,6 @@
         <nav>
             <a href="/">Home</a>
             @guest
-                
                 <a href="/login">Login</a>
                 <a href="{{ route('register') }}">Inscreva-se!</a>
             @endguest

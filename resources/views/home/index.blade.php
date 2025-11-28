@@ -13,11 +13,23 @@
         <img src="{{ Vite::asset('resources/images/logo.jpg') }}" class="image-center">
     </div>
 
+    @guest
     <div class="text-center mt-4" >
         <a href="{{ route('register') }}" class="hover:text-blue-500 text-gray-600">
             <div class="font-['Michroma'] text-base font-bold text-gray-500 mb-5">Cadastre-se aqui e crie suas listas!</div>
         </a>
     </div>
+     @endguest
+
+    
+    @auth
+     <div class="text-center mt-4" >
+        <a href="{{ route('listas.index') }}" class="hover:text-blue-500 text-gray-600">
+            <div class="font-['Michroma'] text-base font-bold text-gray-500 mb-5">Minhas listas!</div>
+        </a>
+    </div>
+    @endauth
+
 @endsection
 
 
