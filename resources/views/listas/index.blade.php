@@ -2,6 +2,11 @@
 
 @section('content')
 
+
+@if ($listas->isEmpty())
+    <p>Nenhuma lista encontrada.</p>
+@else
+
 <div class="listas-container">
     @foreach($listas as $lista)
     <div class="lista">
@@ -23,5 +28,6 @@
     </div>
     @endforeach
 </div>
+@endif
 
 @endsection

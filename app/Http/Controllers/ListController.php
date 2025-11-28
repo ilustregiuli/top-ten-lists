@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Lista;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ListController extends Controller
 {
@@ -13,7 +14,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        $listas = Lista::all();
+        $listas = Lista::all()->where('usuario_id', Auth::user()->id);
         return view('listas.index', compact('listas'));
     }
 
