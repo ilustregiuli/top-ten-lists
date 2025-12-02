@@ -31,9 +31,17 @@ class ListController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        $request->validate([
+            'listName' => 'required|unique:listas,nome',
+        ], [
+            'listName.unique' => 'Já existe uma lista com este nome!',
+            'listName.required' => 'O nome da lista é obrigatório.'
+        ]);
 
-        $lista = Lista::create([
+        $input = $request->all();
+        $userId = Auth::user()->id;
+
+        $listas = Lista::create([
             'nome' => $input['listName'],
             'pos_01' => $input['item_1'] ?? null,
             'pos_02' => $input['item_2'] ??  null,
@@ -45,10 +53,10 @@ class ListController extends Controller
             'pos_08' => $input['item_8'] ??  null,
             'pos_09' => $input['item_9'] ??  null,
             'pos_10' => $input['item_10'] ?? null,
-            'usuario_id' => 1
+            'usuario_id' => $userId 
         ]);
 
-        return view('listas.lista_criada', compact('lista'));
+        return redirect()->route('listas.index');
     }
 
     /**
@@ -64,7 +72,8 @@ class ListController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $lista = Lista::findOrFail($id);
+        return view('listas.cadastra_lista', compact('lista'));
     }
 
     /**
@@ -72,7 +81,31 @@ class ListController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'listName' => 'required|unique:listas,nome,' . $id,
+        ], [
+            'listName.unique' => 'Já existe uma lista com este nome!',
+            'listName.required' => 'O nome da lista é obrigatório.'
+        ]);
+
+        $input = $request->all();
+        $lista = Lista::findOrFail($id);
+
+        $lista->update([
+            'nome' => $input['listName'],
+            'pos_01' => $input['item_1'] ?? null,
+            'pos_02' => $input['item_2'] ??  null,
+            'pos_03' => $input['item_3'] ??  null,
+            'pos_04' => $input['item_4'] ??  null,
+            'pos_05' => $input['item_5'] ?? null,
+            'pos_06' => $input['item_6'] ??  null,
+            'pos_07' => $input['item_7'] ??  null,
+            'pos_08' => $input['item_8'] ??  null,
+            'pos_09' => $input['item_9'] ??  null,
+            'pos_10' => $input['item_10'] ?? null,
+        ]);
+
+        return redirect()->route('listas.index');
     }
 
     /**
