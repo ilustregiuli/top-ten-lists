@@ -14,7 +14,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        $listas = Lista::all()->where('usuario_id', Auth::user()->id);
+        $listas = Lista::where('usuario_id', Auth::id())->get();
         return view('listas.index', compact('listas'));
     }
 
@@ -32,14 +32,20 @@ class ListController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'listName' => 'required|unique:listas,nome',
+            'listName' => [
+                'required',
+                // Unicidade por usuário
+                \Illuminate\Validation\Rule::unique('listas', 'nome')->where(function ($query) {
+                    return $query->where('usuario_id', Auth::id());
+                }),
+            ],
         ], [
-            'listName.unique' => 'Já existe uma lista com este nome!',
+            'listName.unique' => 'Você já possui uma lista com este nome!',
             'listName.required' => 'O nome da lista é obrigatório.'
         ]);
 
         $input = $request->all();
-        $userId = Auth::user()->id;
+        $userId = Auth::id();
 
         $listas = Lista::create([
             'nome' => $input['listName'],
@@ -72,7 +78,8 @@ class ListController extends Controller
      */
     public function edit(string $id)
     {
-        $lista = Lista::findOrFail($id);
+        // Garante que a lista pertence ao usuário logado
+        $lista = Lista::where('usuario_id', Auth::id())->findOrFail($id);
         return view('listas.cadastra_lista', compact('lista'));
     }
 
@@ -81,15 +88,23 @@ class ListController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Garante que a lista pertence ao usuário logado antes de validar/atualizar
+        $lista = Lista::where('usuario_id', Auth::id())->findOrFail($id);
+
         $request->validate([
-            'listName' => 'required|unique:listas,nome,' . $id,
+            'listName' => [
+                'required',
+                // Unicidade por usuário, ignorando o ID atual
+                \Illuminate\Validation\Rule::unique('listas', 'nome')->where(function ($query) {
+                    return $query->where('usuario_id', Auth::id());
+                })->ignore($id),
+            ],
         ], [
-            'listName.unique' => 'Já existe uma lista com este nome!',
+            'listName.unique' => 'Você já possui uma lista com este nome!',
             'listName.required' => 'O nome da lista é obrigatório.'
         ]);
 
         $input = $request->all();
-        $lista = Lista::findOrFail($id);
 
         $lista->update([
             'nome' => $input['listName'],
@@ -113,7 +128,8 @@ class ListController extends Controller
      */
     public function destroy(string $id)
     {
-        $lista = Lista::findOrFail($id);
+        // Garante que a lista pertence ao usuário logado
+        $lista = Lista::where('usuario_id', Auth::id())->findOrFail($id);
         $lista->delete();
         return redirect()->route('listas.index');
     }
