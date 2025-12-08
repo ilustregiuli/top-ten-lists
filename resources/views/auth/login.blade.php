@@ -38,12 +38,15 @@
             </label>
         </div>
 
-        <div class="mt-4 flex justify-end gap-4">  <!-- Container flex, alinhado à direita, com gap de 1rem entre itens -->
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+        <div class="mt-4 flex justify-center gap-4"> 
+            <!-- ENVIO DE EMAIL PARA REDEFINIR SENHA -->
+            <!-- Desativado por enquanto, até criar a funcionalidade de envio de email -->
+             
+            <!-- @if (Route::has('password.request')) -->
+                <!-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
-                </a>
-            @endif    
+                </a> -->
+            <!-- @endif     -->
             <x-primary-button>  <!-- Remova ms-3 e mx-auto, pois o gap controla o espaçamento -->
                 {{ __('Log in') }}
             </x-primary-button>

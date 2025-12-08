@@ -2,13 +2,20 @@
 
 @section('content')
 
-
 @if ($listas->isEmpty())
-    <p>Nenhuma lista encontrada.</p>
+    <div class="mb-4"> <!-- classe para espaçamento -->
+        <p>Nenhuma lista encontrada.</p>
+        <p>(Ei, meio vazio por aqui... vamos cadastrar sua primeira lista?)</p>
+    </div>
+   
+    <div>
+        <a href="{{ route('listas.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"> Adicionar Lista </a>
+    </div>
+
 @else
 
-    <div class="flex justify-between items-center mb-4"> 
-        <h1 class="text-2xl font-bold">
+    <div class="flex justify-between items-center m-4"> 
+        <h1 class="text-2xl font-bold m-4">
             Minhas Listas ({{ ($listas->count())}})
         </h1>
         <a href="{{ route('listas.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"> Adicionar Lista </a>
@@ -33,9 +40,12 @@
             @endfor
         </ol>
         <div class="flex gap-2 mt-4">
-            <a href="{{ route('listas.edit', $lista->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"> Editar </a>
-            <form action="">
-                <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"> 
+            <a href="{{ route('listas.edit', $lista->id) }}" 
+                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"> Editar </a>
+            <form action="{{ route('listas.destroy', $lista->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja deletar esta lista?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"> 
                     Deletar 
                 </button>
             </form>

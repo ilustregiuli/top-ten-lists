@@ -113,6 +113,8 @@ class ListController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $lista = Lista::findOrFail($id);
+        $lista->delete();
+        return redirect()->route('listas.index');
     }
 }

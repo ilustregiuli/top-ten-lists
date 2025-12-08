@@ -7,9 +7,23 @@
     <style>
         .hidden { display: none; }
     </style>
-
+    @php
+        if(isset($lista)){
+            $editar = true;
+        }else{
+            $editar = false;
+        }
+    @endphp
     <div>
-        <h1 class="text-4xl font-bold">{{ isset($lista) ? 'Editar Lista' : 'Cadastro de nova lista' }}</h1>
+        <h1 class="text-4xl font-bold">{{ $editar ? 'Editar Lista' : 'Cadastro de nova lista' }}</h1>
+        @if(!$editar)
+            <h3 class="text-2xl font-bold">Instruções:</h3>
+            <ol class="list-decimal list-inside">
+                <li>Insira o nome da lista e clique no botão "Confirma"</li>
+                <li>Adicione o item e clique em "Adiciona Item" para adicionar o próximo</li>
+                <li>Após adicionar todos os itens, clique no botão "Criar Lista!"</li>
+            </ol>
+        @endif
         <section class="form">
             @if ($errors->any())
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -20,6 +34,8 @@
                     </ul>
                 </div>
             @endif
+
+            
 
             <form id="createList" action="{{ isset($lista) ? route('listas.update', $lista->id) : route('listas.store') }}" method="post">
                 @csrf
@@ -33,7 +49,7 @@
                     type="text" 
                     id="listName" 
                     name="listName" 
-                    value="{{ isset($lista) ? $lista->nome : old('listName') }}"
+                    value="{{ old('listName', $lista->nome ?? '') }}"
                     placeholder="Digite o nome da lista!" required
                     >
                     <br><br>
@@ -51,21 +67,35 @@
                 </div>
 
                 <br>
-                <div id="itemsContainer" style="{{ isset($lista) ? 'display:block' : 'display:none' }};">
-                    @if(isset($lista))
-                        @for($i = 1; $i <= 10; $i++)
-                            @php 
-                                $campo = 'pos_' . str_pad($i, 2, '0', STR_PAD_LEFT); 
-                                $valor = $lista->$campo;
-                            @endphp
-                            @if($valor)
-                                <div id="item_{{ $i }}">
-                                    <label for="item_{{ $i }}">{{ $i }}º Lugar:</label>
-                                    <input type="text" id="item_{{ $i }}" name="item_{{ $i }}" value="{{ $valor }}">
-                                </div>
-                            @endif
-                        @endfor
-                    @endif
+                <div id="itemsContainer" style="{{ (isset($lista) || old('listName')) ? 'display:block' : 'display:none' }};">
+                    @php
+                        $items = [];
+                        if (old('_token')) {
+                            // Reconstruct from old input
+                            foreach (request()->old() as $key => $value) {
+                                if (str_starts_with($key, 'item_') && !empty($value)) {
+                                    $index = (int) str_replace('item_', '', $key);
+                                    $items[$index] = $value;
+                                }
+                            }
+                            ksort($items);
+                        } elseif (isset($lista)) {
+                            // Reconstruct from database
+                            for ($i = 1; $i <= 10; $i++) {
+                                $campo = 'pos_' . str_pad($i, 2, '0', STR_PAD_LEFT);
+                                if ($lista->$campo) {
+                                    $items[$i] = $lista->$campo;
+                                }
+                            }
+                        }
+                    @endphp
+
+                    @foreach($items as $i => $valor)
+                        <div id="item_{{ $i }}">
+                            <label for="item_{{ $i }}">{{ $i }}º Lugar:</label>
+                            <input type="text" id="item_{{ $i }}" name="item_{{ $i }}" value="{{ $valor }}">
+                        </div>
+                    @endforeach
                 </div>
                 <br>
                 <div style="display: flex; justify-content: center;">
@@ -77,13 +107,13 @@
                 </div>
 
                 <br>
-                <div style="display: flex; justify-content: center;">
+                <div style="display: flex; justify-content: center;" class="mb-4">
                     <button 
                     type="submit" 
                     id="sendList" 
                     style="display:none;"
                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                    >Criar Lista!</button>
+                    >{{ isset($lista) ? 'Salvar Alteração' : 'Criar Lista!' }}</button>
                     <button 
                     type="button" 
                     id="clearList" 
@@ -92,8 +122,9 @@
                 </div>
 
             </form>
-            <div>
-                <a href="{{ route('listas.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"> Voltar </a>
+            <div class="mb-4">
+                <a href="{{ route('listas.index') }}" 
+                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"> Voltar </a>
             </div>
         </section>
 
@@ -103,19 +134,10 @@
 
     <script>
 
-        let position = {{ isset($lista) ? 10 : 0 }}; // Assuming if editing, we might have up to 10. Better logic could count non-nulls.
-        // Simple fix: if editing, set position to count of non-null items to allow adding more if < 10.
-        @if(isset($lista))
-            @php
-                $count = 0;
-                for($i=1; $i<=10; $i++) {
-                    $campo = 'pos_' . str_pad($i, 2, '0', STR_PAD_LEFT);
-                    if($lista->$campo) $count = $i;
-                }
-            @endphp
-            position = {{ $count }};
-            
-            // Show buttons if editing
+        let position = {{ count($items) }};
+        
+        // Show buttons if editing or if there are old items (validation error)
+        @if(isset($lista) || count($items) > 0)
             document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('addPositions').style.display = 'none';
                 document.getElementById('addItemPosition').style.display = 'block';
