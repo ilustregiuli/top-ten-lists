@@ -51,6 +51,11 @@ Nesse app, você poderá:
 <p> Implementando o uso do Breeze para autenticação. </p>
 <p> Troca pelas rotas e controllers do Breeze. </p>
 
+- PRIMEIRA MVP 1.0
+<p> Data Release: 09/12/2025 </p>
+<p> Implementado a criação, edição, salvamento e exibição das listas. </p>
+<p> Ajustes de segurança criados. </p>
+
 ## Detalhes Técnicos
 
 <p> Projeto criado em linguagem: PHP 8.2.27 </p>
