@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lista extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'nome',
         'pos_01',
@@ -25,6 +28,14 @@ class Lista extends Model
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+     /**
+     * Escopo para retornar apenas listas do usuário logado
+     */
+    public function scopeDoUsuario($query, $userId = null)
+    {
+        return $query->where('usuario_id', $userId ?? auth()->id());
     }
 
 }

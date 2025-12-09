@@ -37,7 +37,7 @@
 
             
 
-            <form id="createList" action="{{ isset($lista) ? route('listas.update', $lista->id) : route('listas.store') }}" method="post">
+            <form id="createList" action="{{ isset($lista) ? route('listas.update', $lista->id) : route('listas.store') }}" method="post" autocomplete="off">
                 @csrf
                 @if(isset($lista))
                     @method('PUT')
@@ -51,6 +51,7 @@
                     name="listName" 
                     value="{{ old('listName', $lista->nome ?? '') }}"
                     placeholder="Digite o nome da lista!" required
+                    autocomplete="off"
                     >
                     <br><br>
                 </div>
@@ -93,7 +94,7 @@
                     @foreach($items as $i => $valor)
                         <div id="item_{{ $i }}">
                             <label for="item_{{ $i }}">{{ $i }}º Lugar:</label>
-                            <input type="text" id="item_{{ $i }}" name="item_{{ $i }}" value="{{ $valor }}">
+                            <input type="text" id="item_{{ $i }}" name="item_{{ $i }}" value="{{ $valor }}" autocomplete="off">
                         </div>
                     @endforeach
                 </div>
@@ -186,6 +187,7 @@
 
             const input = document.createElement('input');
             input.type = 'text';
+            input.setAttribute('autocomplete', 'off');
             input.id = `item_${position}`;
             input.name = `item_${position}`;
 

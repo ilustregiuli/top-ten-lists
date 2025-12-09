@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Lista;
+use App\Rules\NomeUnicoPorUsuario;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ListController extends Controller
 {
@@ -14,7 +13,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        $listas = Lista::where('usuario_id', Auth::id())->get();
+        $listas = Lista::doUsuario()->get();
         return view('listas.index', compact('listas'));
     }
 
@@ -32,105 +31,73 @@ class ListController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'listName' => [
-                'required',
-                // Unicidade por usuário
-                \Illuminate\Validation\Rule::unique('listas', 'nome')->where(function ($query) {
-                    return $query->where('usuario_id', Auth::id());
-                }),
-            ],
-        ], [
-            'listName.unique' => 'Você já possui uma lista com este nome!',
-            'listName.required' => 'O nome da lista é obrigatório.'
+            'listName' => ['required', new NomeUnicoPorUsuario()],
         ]);
 
-        $input = $request->all();
-        $userId = Auth::id();
+        Lista::create(array_merge([
+            'nome' => $request->listName,
+            'usuario_id' => auth()->id(),
+        ], $this->montarPosicoes($request)));
 
-        $listas = Lista::create([
-            'nome' => $input['listName'],
-            'pos_01' => $input['item_1'] ?? null,
-            'pos_02' => $input['item_2'] ??  null,
-            'pos_03' => $input['item_3'] ??  null,
-            'pos_04' => $input['item_4'] ??  null,
-            'pos_05' => $input['item_5'] ?? null,
-            'pos_06' => $input['item_6'] ??  null,
-            'pos_07' => $input['item_7'] ??  null,
-            'pos_08' => $input['item_8'] ??  null,
-            'pos_09' => $input['item_9'] ??  null,
-            'pos_10' => $input['item_10'] ?? null,
-            'usuario_id' => $userId 
-        ]);
-
-        return redirect()->route('listas.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect()->route('listas.index')
+            ->with('success', 'Lista criada com sucesso!');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Lista $lista)
     {
-        // Garante que a lista pertence ao usuário logado
-        $lista = Lista::where('usuario_id', Auth::id())->findOrFail($id);
-        return view('listas.cadastra_lista', compact('lista'));
+        $this->authorize('update', $lista);
+        return view('listas.cadastra_lista', compact('lista')); 
+            
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Lista $lista)
     {
-        // Garante que a lista pertence ao usuário logado antes de validar/atualizar
-        $lista = Lista::where('usuario_id', Auth::id())->findOrFail($id);
+        $this->authorize('update', $lista);
 
         $request->validate([
-            'listName' => [
-                'required',
-                // Unicidade por usuário, ignorando o ID atual
-                \Illuminate\Validation\Rule::unique('listas', 'nome')->where(function ($query) {
-                    return $query->where('usuario_id', Auth::id());
-                })->ignore($id),
-            ],
-        ], [
-            'listName.unique' => 'Você já possui uma lista com este nome!',
-            'listName.required' => 'O nome da lista é obrigatório.'
+            'listName' => ['required', new NomeUnicoPorUsuario($lista->id)],
         ]);
 
-        $input = $request->all();
+        $lista->update(array_merge([
+            'nome' => $request->listName,
+        ], $this->montarPosicoes($request)));
 
-        $lista->update([
-            'nome' => $input['listName'],
-            'pos_01' => $input['item_1'] ?? null,
-            'pos_02' => $input['item_2'] ??  null,
-            'pos_03' => $input['item_3'] ??  null,
-            'pos_04' => $input['item_4'] ??  null,
-            'pos_05' => $input['item_5'] ?? null,
-            'pos_06' => $input['item_6'] ??  null,
-            'pos_07' => $input['item_7'] ??  null,
-            'pos_08' => $input['item_8'] ??  null,
-            'pos_09' => $input['item_9'] ??  null,
-            'pos_10' => $input['item_10'] ?? null,
-        ]);
-
-        return redirect()->route('listas.index');
+        return redirect()->route('listas.index')
+            ->with('success', 'Lista atualizada com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Lista $lista)
     {
-        // Garante que a lista pertence ao usuário logado
-        $lista = Lista::where('usuario_id', Auth::id())->findOrFail($id);
+        $this->authorize('delete', $lista);
         $lista->delete();
-        return redirect()->route('listas.index');
+
+        return redirect()->route('listas.index')
+            ->with('success', 'Lista deletada com sucesso!');
+    }
+
+    /**
+     * Monta os campos pos_01 ... pos_10
+     */
+    private function montarPosicoes(Request $request): array
+    {
+        $data = [];
+
+        for ($i = 1; $i <= 10; $i++) {
+            $key = 'pos_' . str_pad($i, 2, '0', STR_PAD_LEFT);
+            $field = 'item_' . $i;
+
+            $data[$key] = $request->input($field) ?: null;
+        }
+
+        return $data;
     }
 }

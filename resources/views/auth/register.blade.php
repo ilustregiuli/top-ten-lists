@@ -3,20 +3,20 @@
 @section('content')
 
 <x-guest-layout>    
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" autocomplete="off">
         @csrf
 
         <!-- Name -->
         <div>
             <x-input-label for="nome" :value="__('Nome')" />
-            <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus autocomplete="nome" />
+            <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus autocomplete="off" />
             <x-input-error :messages="$errors->get('nome')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-2">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="off" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -27,7 +27,7 @@
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
-                            required autocomplete="new-password" />
+                            required autocomplete="off" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -38,7 +38,7 @@
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                            name="password_confirmation" required autocomplete="off" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>

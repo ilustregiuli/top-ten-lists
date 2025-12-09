@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'TOP TEN LISTS')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body>
     <header>
@@ -29,6 +30,8 @@
     </header>
 
     <main>
+
+
         <div>
             @yield('content')
         </div>   
@@ -37,5 +40,21 @@
     <footer>
         <p>Giuli G. Ilustre - 2025</p>
     </footer>
+    @if (session('success'))
+        <x-alert type="success" :message="session('success')" />
+    @endif
+
+    @if (session('error'))
+        <x-alert type="error" :message="session('error')" />
+    @endif
+
+    @if (session('warning'))
+        <x-alert type="warning" :message="session('warning')" />
+    @endif
+
+    @if (session('info'))
+        <x-alert type="info" :message="session('info')" />
+@endif
+
 </body>
 </html>
