@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     unzip \
     nginx \
+    postgresql-client \
     && docker-php-ext-install pdo pdo_pgsql zip
 
 # Instala o Composer
@@ -42,7 +43,11 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 # Copia a configuração do Nginx
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
+# Copia o entrypoint
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 EXPOSE 80
 
-# Script de inicialização
-CMD service nginx start && php-fpm
+# Usa o entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
