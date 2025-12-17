@@ -52,7 +52,7 @@
                     value="{{ old('listName', $lista->nome ?? '') }}"
                     placeholder="Digite o nome da lista!" required
                     autocomplete="off"
-                    class="w-full rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 bg-white"
+                    class="w-full rounded-md border-[#333] shadow-md focus:border-indigo-500 focus:ring-indigo-500 bg-[#1e1e1e] text-gray-200"
                     >
                     <br><br>
                 </div>
@@ -95,7 +95,7 @@
                     @foreach($items as $i => $valor)
                         <div id="item_{{ $i }}">
                             <label for="item_{{ $i }}">{{ $i }}º Lugar:</label>
-                            <input type="text" id="item_{{ $i }}" name="item_{{ $i }}" value="{{ $valor }}" autocomplete="off" class="w-full rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 bg-white mt-1">
+                            <input type="text" id="item_{{ $i }}" name="item_{{ $i }}" value="{{ $valor }}" autocomplete="off" class="w-full rounded-md border-[#333] shadow-md focus:border-indigo-500 focus:ring-indigo-500 bg-[#1e1e1e] text-gray-200 mt-1">
                         </div>
                     @endforeach
                 </div>
@@ -189,7 +189,7 @@
             const input = document.createElement('input');
             input.type = 'text';
             input.setAttribute('autocomplete', 'off');
-            input.className = 'w-full rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 bg-white mt-1';
+            input.className = 'w-full rounded-md border-[#333] shadow-md focus:border-indigo-500 focus:ring-indigo-500 bg-[#1e1e1e] text-gray-200 mt-1';
             input.id = `item_${position}`;
             input.name = `item_${position}`;
 

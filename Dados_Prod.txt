@@ -1,0 +1,7 @@
+Banco de Dados:
+
+HOST: dpg-d4s5j37pm1nc73aj3lc0-a
+DATABASE: top_ten_lists_db
+USER: top_ten_lists_db_user
+PASSWORD: Yl4g1a6CMnTMi2OX9o5vlgE5TJihHIXe
+PORT: 5432

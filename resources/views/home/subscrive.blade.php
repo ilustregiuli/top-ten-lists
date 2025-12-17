@@ -6,7 +6,7 @@
     <div>
         <h1 class="michroma-regular">TOP TEN LISTS</h1>
         <section class="form">
-            <h2>Inscreva-se e comece a cadastrar suas listas!</h2>
+            <h2 class="text-2xl font-bold text-white mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,1)]">Inscreva-se e comece a cadastrar suas listas!</h2>
 
             <form id="registroUser" action="{{ route('cadastrar') }}" method="post">
                 @csrf

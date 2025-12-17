@@ -3,10 +3,10 @@
 @section('content')
 
     <div class="text-center">  <!-- Centraliza tudo -->
-        <h1 class="font-['Michroma'] text-4xl font-bold text-gray-800 mb-4">TOP TEN LISTS</h1>  <!-- Usa fonte Michroma via Tailwind (configure abaixo) -->
-        <h2 class="font-['Michroma'] text-2xl font-bold text-gray-600 mb-2">Escolha seus favoritos</h2>
-        <h2 class="font-['Michroma']  text-2xl font-bold text-gray-600 mb-2">Organize e gerencie</h2>
-        <h2 class="font-['Michroma']  text-2xl font-bold text-gray-600 mb-2">Compartilhe</h2>
+        <h1 class="font-['Michroma'] text-4xl font-bold text-gray-200 mb-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">TOP TEN LISTS</h1>  <!-- Usa fonte Michroma via Tailwind (configure abaixo) -->
+        <h2 class="font-['Michroma'] text-2xl font-bold text-gray-400 mb-2">Escolha seus favoritos</h2>
+        <h2 class="font-['Michroma']  text-2xl font-bold text-gray-400 mb-2">Organize e gerencie</h2>
+        <h2 class="font-['Michroma']  text-2xl font-bold text-gray-400 mb-2">Compartilhe</h2>
     </div>
 
     <div class="flex justify-center mt-4">

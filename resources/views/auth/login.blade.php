@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="font-['Michroma'] text-2xl font-bold text-gray-800 mb-10">Faça login e comece a organizar suas listas!</div>
+    <div class="font-['Michroma'] text-2xl font-bold text-gray-200 mb-10">Faça login e comece a organizar suas listas!</div>
     
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
